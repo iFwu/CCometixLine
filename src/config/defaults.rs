@@ -1,24 +1,47 @@
-use super::types::{Config, SegmentsConfig};
-
-pub const DEFAULT_CONFIG: Config = Config {
-    theme: String::new(), // Set to "dark" at runtime
-    segments: SegmentsConfig {
-        directory: true,
-        git: true,
-        model: true,
-        usage: true,
-    },
-};
+use super::types::{Config, SegmentsConfig, SegmentConfig, SegmentStyle};
 
 impl Default for Config {
     fn default() -> Self {
         Config {
             theme: "dark".to_string(),
             segments: SegmentsConfig {
-                directory: true,
-                git: true,
-                model: true,
-                usage: true,
+                model: SegmentConfig {
+                    enabled: true,
+                    style: SegmentStyle {
+                        color: 36,
+                        bold: false,
+                        dim: true,
+                    },
+                },
+                directory: SegmentConfig {
+                    enabled: true,
+                    style: SegmentStyle {
+                        color: 33,
+                        bold: true,
+                        dim: false,
+                    },
+                },
+                git: SegmentConfig {
+                    enabled: true,
+                    style: SegmentStyle {
+                        color: 34,
+                        bold: true,
+                        dim: false,
+                    },
+                },
+                usage: SegmentConfig {
+                    enabled: true,
+                    style: SegmentStyle {
+                        color: 35,
+                        bold: false,
+                        dim: false,
+                    },
+                },
+                separator: SegmentStyle {
+                    color: 90,
+                    bold: false,
+                    dim: false,
+                },
             },
         }
     }

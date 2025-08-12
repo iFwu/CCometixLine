@@ -1,0 +1,42 @@
+{
+  "theme": "dark",
+  "segments": {
+    "model": {
+      "enabled": true,
+      "style": {
+        "color": 36,
+        "bold": false,
+        "dim": true
+      }
+    },
+    "directory": {
+      "enabled": true,
+      "style": {
+        "color": 33,
+        "bold": true,
+        "dim": false
+      }
+    },
+    "git": {
+      "enabled": true,
+      "style": {
+        "color": 34,
+        "bold": true,
+        "dim": false
+      }
+    },
+    "usage": {
+      "enabled": true,
+      "style": {
+        "color": 35,
+        "bold": false,
+        "dim": false
+      }
+    },
+    "separator": {
+      "color": 90,
+      "bold": false,
+      "dim": false
+    }
+  }
+}
