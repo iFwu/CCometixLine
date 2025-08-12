@@ -175,12 +175,12 @@ impl GitSegment {
         let mut parts = Vec::new();
 
         // Branch name with Nerd Font branch icon
-        parts.push(format!("\u{f02a2} {}", info.branch));
+        parts.push(format!("\u{e727} {}", info.branch));
 
         // Status indicators using simple Unicode symbols
         match info.status {
             GitStatus::Clean => parts.push("✓".to_string()),
-            GitStatus::Dirty => parts.push("●".to_string()),
+            GitStatus::Dirty => parts.push("*".to_string()),
             GitStatus::Conflicts => parts.push("⚠".to_string()),
         }
 

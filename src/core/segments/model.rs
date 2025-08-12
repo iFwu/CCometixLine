@@ -16,11 +16,9 @@ impl Segment for ModelSegment {
         if !self.enabled {
             return String::new();
         }
-
-        format!(
-            "\u{e26d} {}",
-            self.format_model_name(&input.model.display_name)
-        )
+        
+        let icon = self.get_model_icon(&input.model.display_name);
+        format!("{} {}", icon, self.format_model_name(&input.model.display_name))
     }
 
     fn enabled(&self) -> bool {
@@ -29,6 +27,14 @@ impl Segment for ModelSegment {
 }
 
 impl ModelSegment {
+    fn get_model_icon(&self, display_name: &str) -> &'static str {
+        match display_name {
+            name if name.to_lowercase().contains("opus") => "\u{f0e0c}", // Palette icon for Opus
+            name if name.to_lowercase().contains("sonnet") => "\u{f069}", // Asterisk icon for Sonnet
+            _ => "\u{e26d}", // Default AI icon
+        }
+    }
+
     fn format_model_name(&self, display_name: &str) -> String {
         // Simplify model display names
         match display_name {
