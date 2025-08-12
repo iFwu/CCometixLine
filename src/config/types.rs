@@ -8,10 +8,24 @@ pub struct Config {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SegmentsConfig {
-    pub directory: bool,
-    pub git: bool,
-    pub model: bool,
-    pub usage: bool,
+    pub directory: SegmentConfig,
+    pub git: SegmentConfig,
+    pub model: SegmentConfig,
+    pub usage: SegmentConfig,
+    pub separator: SegmentStyle,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct SegmentConfig {
+    pub enabled: bool,
+    pub style: SegmentStyle,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct SegmentStyle {
+    pub color: u8,
+    pub bold: bool,
+    pub dim: bool,
 }
 
 // Data structures compatible with existing main.rs
