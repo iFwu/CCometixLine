@@ -13,6 +13,10 @@ impl StatusLineGenerator {
     fn format_with_style(&self, content: &str, style: &SegmentStyle) -> String {
         let mut codes = Vec::new();
         
+        // Reset all attributes first to ensure clean state
+        codes.push("0".to_string());
+        
+        // Then apply desired attributes
         if style.bold {
             codes.push("1".to_string());
         }
@@ -34,7 +38,15 @@ impl StatusLineGenerator {
         if self.config.segments.model.enabled {
             let model_segment = ModelSegment::new(true);
             let content = model_segment.render(input);
-            segments.push(self.format_with_style(&content, &self.config.segments.model.style));
+            // Split icon and model name to apply styles separately
+            let parts: Vec<&str> = content.splitn(2, ' ').collect();
+            if parts.len() == 2 {
+                let icon_formatted = self.format_with_style(parts[0], &self.config.segments.model.style);
+                let name_formatted = self.format_with_style(parts[1], &self.config.segments.model.style);
+                segments.push(format!("{} {}", icon_formatted, name_formatted));
+            } else {
+                segments.push(self.format_with_style(&content, &self.config.segments.model.style));
+            }
         }
         
         if self.config.segments.directory.enabled {
