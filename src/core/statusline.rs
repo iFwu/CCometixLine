@@ -15,15 +15,14 @@ impl StatusLineGenerator {
         
         if style.bold {
             codes.push("1".to_string());
-        } else {
-            codes.push("22".to_string()); // Explicitly disable bold
         }
         
         if style.dim {
             codes.push("2".to_string());
         }
         
-        codes.push(style.color.to_string());
+        // Use 256-color ANSI escape sequence format
+        codes.push(format!("38;5;{}", style.color));
         
         format!("\x1b[{}m{}\x1b[0m", codes.join(";"), content)
     }
